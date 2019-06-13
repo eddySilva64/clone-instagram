@@ -1,5 +1,5 @@
 const Post = require('../models/Post')
-const sharp = require('sharp')
+const jimp = require('jimp')
 const path = require('path')
 const fs = require('fs')
 
@@ -20,11 +20,12 @@ module.exports = {
 
         const [name] = image.split('.')
         const fileName = `${name}.jpg`
-        await sharp(req.file.path)
-        .resize(500)
-        .jpeg({ quality: 70 })
-        .toFile(
-            path.resolve(req.file.destination, 'resized', fileName)
+        const jimp = require('jimp')
+        let jimpImg = await jimp.read(req.file.path)
+
+        jimpImg.resize(500, 500)
+        .write(
+        path.resolve(req.file.destination, 'resized', image)
         )
 
         fs.unlinkSync(req.file.path)

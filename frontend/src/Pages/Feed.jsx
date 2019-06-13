@@ -13,7 +13,7 @@ class Feed extends Component {
     };
 
     async componentDidMount(){
-        const response = await api.get('post');
+        const response = await api.get('posts');
         this.setState({ feed: response.data });
     }
 
